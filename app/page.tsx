@@ -1,64 +1,88 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Home() {
+  const [code, setCode] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (code.trim()) {
+      setMessage(`🎅 Code "${code}" received! Preparing your present...`);
+    } else {
+      setMessage("⚠️ Insert your secret code!");
+    }
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="min-h-screen bg-gradient-to-b from-sky-400 to-blue-300 flex items-center justify-center p-4">
+      <main className="max-w-md w-full">
+        {/* Comic-style card */}
+        <div className="bg-white rounded-3xl shadow-2xl border-4 border-black p-8 relative">
+          {/* Comic burst decoration */}
+          <div className="absolute -top-6 -right-6 bg-yellow-400 border-4 border-black rounded-full w-16 h-16 flex items-center justify-center rotate-12 shadow-lg">
+            <span className="text-3xl animate-pulse">🎁</span>
+          </div>
+
+          {/* Santa image */}
+          <div className="flex justify-center mb-6 -mt-4">
+            <div className="relative w-64 h-64 border-4 border-black rounded-2xl overflow-hidden bg-gradient-to-br from-blue-200 to-blue-100 shadow-lg">
+              <Image
+                src="/images/comics/secretsanta.png"
+                alt="Secret Santa"
+                fill
+                className="object-contain p-2"
+                priority
+              />
+            </div>
+          </div>
+
+          {/* Title */}
+          <h1 className="text-4xl font-black text-center mb-2 text-red-600 comic-text">
+            SECRET SANTA
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-center text-gray-700 font-bold mb-6 text-lg">
+            🎄 Insert here your secret code 🎄
           </p>
+
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <input
+                type="text"
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                placeholder="Your code..."
+                className="w-full px-4 py-3 border-4 border-black rounded-xl text-lg font-bold focus:outline-none focus:ring-4 focus:ring-yellow-400 shadow-md"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-red-600 hover:bg-red-700 text-white font-black text-xl py-4 px-6 rounded-xl border-4 border-black shadow-lg transform transition hover:scale-105 active:scale-95"
+            >
+              🎅 Discover your present! 🎅
+            </button>
+          </form>
+
+          {/* Message */}
+          {message && (
+            <div className="mt-6 p-4 bg-yellow-100 border-4 border-black rounded-xl">
+              <p className="text-center font-bold text-gray-800">{message}</p>
+            </div>
+          )}
+
+          {/* Decorative snowflakes */}
+          {/*<div className="absolute -bottom-3 left-4 text-2xl">❄️</div>
+          <div className="absolute -bottom-3 right-4 text-2xl">❄️</div>*/}
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+
+        {/* Footer text */}
+        <p className="text-center mt-6 text-white font-bold text-shadow-lg drop-shadow-lg">
+          ⭐ Ho! Ho! Ho! Merry Christmas! ⭐
+        </p>
       </main>
     </div>
   );
