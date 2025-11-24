@@ -17,14 +17,21 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-400 to-blue-300 flex items-center justify-center p-4">
+    <div 
+      className="min-h-screen flex items-center justify-center p-4"
+      style={{
+        backgroundImage: 'url(/images/backgrounds/5.webp)',
+        backgroundRepeat: 'repeat',
+        backgroundSize: '25%'
+      }}
+    >
       <main className="max-w-md w-full">
         {/* Comic-style card */}
         <div className="bg-white rounded-3xl shadow-2xl border-4 border-black p-8 relative">
           {/* Comic burst decoration */}
-          <div className="absolute -top-6 -right-6 bg-yellow-400 border-4 border-black rounded-full w-16 h-16 flex items-center justify-center rotate-12 shadow-lg">
+          {/*<div className="absolute -top-6 -right-6 bg-yellow-400 border-4 border-black rounded-full w-16 h-16 flex items-center justify-center rotate-12 shadow-lg">
             <span className="text-3xl animate-pulse">🎁</span>
-          </div>
+          </div>*/}
 
           {/* Santa image */}
           <div className="flex justify-center mb-6 -mt-4">
@@ -63,7 +70,7 @@ export default function Home() {
               type="submit"
               className="w-full bg-red-600 hover:bg-red-700 text-white font-black text-xl py-4 px-6 rounded-xl border-4 border-black shadow-lg transform transition hover:scale-105 active:scale-95"
             >
-              🎅 Discover your present! 🎅
+              🎅 Discover your pair! 🎅
             </button>
           </form>
 
