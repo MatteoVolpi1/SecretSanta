@@ -27,7 +27,7 @@ export default function Home() {
     >
       <main className="max-w-md w-full">
         {/* Comic-style card */}
-        <div className="bg-white rounded-3xl shadow-2xl border-4 border-black p-8 relative">
+        <div className="bg-white rounded-2xl shadow-2xl border-2 border-black p-8 relative">
           {/* Comic burst decoration */}
           {/*<div className="absolute -top-6 -right-6 bg-yellow-400 border-4 border-black rounded-full w-16 h-16 flex items-center justify-center rotate-12 shadow-lg">
             <span className="text-3xl animate-pulse">🎁</span>
@@ -35,7 +35,7 @@ export default function Home() {
 
           {/* Santa image */}
           <div className="flex justify-center mb-6 -mt-4">
-            <div className="relative w-64 h-64 border-4 border-black rounded-2xl overflow-hidden bg-gradient-to-br from-blue-200 to-blue-100 shadow-lg">
+            <div className="relative w-96 h-96">
               <Image
                 src="/images/comics/secretsanta.png"
                 alt="Secret Santa"
@@ -62,13 +62,13 @@ export default function Home() {
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
                 placeholder="Your code..."
-                className="w-full px-4 py-3 border-4 border-black rounded-xl text-lg font-bold focus:outline-none focus:ring-4 focus:ring-yellow-400 shadow-md"
+                className="w-full px-4 py-3 border-2 border-black rounded-xl text-lg font-bold focus:outline-none focus:ring-4 focus:ring-yellow-400 shadow-md"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full bg-red-600 hover:bg-red-700 text-white font-black text-xl py-4 px-6 rounded-xl border-4 border-black shadow-lg transform transition hover:scale-105 active:scale-95"
+              className="w-full bg-red-600 hover:bg-red-700 text-white font-black text-xl py-4 px-6 rounded-xl border-2 border-black shadow-lg transform transition hover:scale-105 active:scale-95"
             >
               🎅 Discover your pair! 🎅
             </button>
@@ -76,7 +76,7 @@ export default function Home() {
 
           {/* Message */}
           {message && (
-            <div className="mt-6 p-4 bg-yellow-100 border-4 border-black rounded-xl">
+            <div className="mt-6 p-4 bg-yellow-100 border-2 border-black rounded-xl">
               <p className="text-center font-bold text-gray-800">{message}</p>
             </div>
           )}
