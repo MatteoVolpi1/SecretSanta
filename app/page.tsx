@@ -76,7 +76,7 @@ export default function Home() {
 
           {/* Message */}
           {message && (
-            <div className="mt-6 p-4 bg-yellow-100 border-2 border-black rounded-xl">
+            <div className="mt-4 p-4 bg-yellow-100 border-2 border-black rounded-xl">
               <p className="text-center font-bold text-gray-800">{message}</p>
             </div>
           )}
