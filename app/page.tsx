@@ -2,15 +2,19 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [code, setCode] = useState("");
   const [message, setMessage] = useState("");
+  const [showConfirm, setShowConfirm] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (code.trim()) {
       setMessage(`🎅 Code "${code}" received! Preparing your present...`);
+      setShowConfirm(true);
     } else {
       setMessage("⚠️ Insert your secret code!");
     }
@@ -85,6 +89,33 @@ export default function Home() {
           {message && (
             <div className="mt-4 p-4 bg-yellow-100 border-2 border-black rounded-xl">
               <p className="text-center font-bold text-gray-800">{message}</p>
+            </div>
+          )}
+
+          {/* Confirm Modal */}
+          {showConfirm && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center">
+              <div className="absolute inset-0 bg-black/50" onClick={() => setShowConfirm(false)} />
+              <div className="relative bg-white border-2 border-black rounded-2xl shadow-2xl max-w-md w-full mx-4 p-6">
+                <h2 className="text-2xl font-black text-red-600 mb-3 text-center">Attention!</h2>
+                <p className="text-gray-800 font-bold text-center mb-4">
+                  The code can be used only 1 time. Remember your pair! If you write it down, keep it somewhere safe from others!
+                </p>
+                <div className="flex gap-3">
+                  <button
+                    className="flex-1 bg-gray-200 hover:bg-gray-300 text-black font-black py-3 px-4 rounded-xl border-2 border-black shadow-md"
+                    onClick={() => setShowConfirm(false)}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="flex-1 bg-red-600 hover:bg-red-700 text-white font-black py-3 px-4 rounded-xl border-2 border-black shadow-md"
+                    onClick={() => router.push(`/result?code=${encodeURIComponent(code)}`)}
+                  >
+                    Proceed
+                  </button>
+                </div>
+              </div>
             </div>
           )}
 
