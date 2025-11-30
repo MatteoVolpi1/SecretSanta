@@ -2,12 +2,13 @@
   "name": "SecretSanta",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:pairs": "ts-node scripts/generatePairs.ts"
+    "test:pairs": "ts-node --esm scripts/generatePairs.ts"
   },
   "dependencies": {
     "mongodb": "^7.0.0",

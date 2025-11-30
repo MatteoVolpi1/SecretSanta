@@ -1,16 +1,5 @@
-type Person = {
-  name: string;
-};
-
-// Input list (expandable)
-const people: Person[] = [
-  { name: "Loyda" },
-  { name: "Gavin" },
-  { name: "Stephanie" },
-  { name: "Abuela" },
-  { name: "Abuelo" },
-  { name: "Matteo" },
-];
+import { persons as people } from "../data/persons.ts";
+import { pathToFileURL } from "url";
 
 // Constraint: Abuela <-> Gavin are not allowed pairs in either direction
 function isForbiddenPair(giver: string, receiver: string): boolean {
@@ -135,9 +124,20 @@ function runTests(iterations = 1000) {
   console.log(`All ${iterations} tests passed ✅`);
 }
 
-if (require.main === module) {
+// ESM-friendly "run if executed directly"
+const isDirectRun = import.meta.url === pathToFileURL(process.argv[1]).href;
+if (isDirectRun) {
   try {
-    runTests(1000);
+    // runTests(1000);
+    // Print one sample of pairs with receiver codes
+    const names = people.map((p) => p.name);
+    const sample = generatePairs(names);
+    console.log("\nSample pairs (giver -> receiver [receiver code]):");
+    for (const giver of names) {
+      const receiver = sample.get(giver)!;
+      const receiverCode = people.find((p) => p.name === receiver)?.code || "?";
+      console.log(`${giver} -> ${receiver} [${receiverCode}]`);
+    }
   } catch (e: any) {
     console.error("Test failed:", e?.message || e);
     process.exit(1);
