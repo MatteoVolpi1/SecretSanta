@@ -1,13 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [code, setCode] = useState("");
   const [message, setMessage] = useState("");
   const [showConfirm, setShowConfirm] = useState(false);
+  const [showRules, setShowRules] = useState(false);
   const router = useRouter();
   
   const getUsedCodes = (): string[] => {
@@ -23,6 +24,18 @@ export default function Home() {
     const used = getUsedCodes();
     return used.includes(c.trim());
   };
+
+  // Show rules alert only the first time user lands on page
+  // Use effect to avoid setting state during render (prevents hydration mismatch)
+  // and to safely access localStorage on client.
+  useEffect(() => {
+    try {
+      const shown = localStorage.getItem("rules-shown");
+      if (!shown) {
+        setShowRules(true);
+      }
+    } catch {}
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -101,7 +114,8 @@ export default function Home() {
           type="submit"
           className="w-full bg-red-600 hover:bg-red-700 text-white font-black text-xl py-4 px-6 rounded-xl border-2 border-black shadow-lg transform transition hover:scale-105 active:scale-95"
         >
-          🎅 Discover your pair! 🎅
+          <span className="hidden sm:inline">🎅 Discover your pair! 🎅</span>
+          <span className="inline sm:hidden">Discover your pair!</span>
         </button>
         </form>
 
@@ -111,6 +125,31 @@ export default function Home() {
           <p className="text-center font-bold text-gray-800">{message}</p>
         </div>
         )}
+
+          {/* One-time Rules Modal */}
+          {showRules && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center">
+              <div className="absolute inset-0 bg-black/50" onClick={() => setShowRules(false)} />
+              <div className="relative bg-white border-2 border-black rounded-2xl shadow-2xl max-w-md w-full mx-4 p-6">
+                <h2 className="text-2xl font-black text-red-600 mb-3 text-center">Secret Santa Rules</h2>
+                <ul className="list-disc list-inside text-gray-800 font-bold space-y-2">
+                  <li>Keep your pair strictly secret!</li>
+                  <li>The code is sent via email and can be used only once.</li>
+                  <li>Total gift value should be around $50 per person.</li>
+                  <li>If a single present costs less, combine multiple gifts to reach ~$50.</li>
+                </ul>
+                <button
+                  className="mt-4 w-full bg-red-600 hover:bg-red-700 text-white font-black py-3 px-4 rounded-xl border-2 border-black shadow-md"
+                  onClick={() => {
+                    try { localStorage.setItem("rules-shown", "1"); } catch {}
+                    setShowRules(false);
+                  }}
+                >
+                  I understand
+                </button>
+              </div>
+            </div>
+          )}
 
         {/* Confirm Modal */}
         {showConfirm && (
