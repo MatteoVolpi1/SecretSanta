@@ -15,7 +15,7 @@ export default function ResultPage() {
   }, []);
 
   // Static demo data: name + gift ideas
-  const pairName = "Nome"; // replace with dynamic later
+  const pairName = "Matteo"; // replace with dynamic later
   const hints = [
     { label: "DSW Gift Card $10-50 for winter shoes" },
     { label: "Ross Gift Card $10-50" },
@@ -29,8 +29,38 @@ export default function ResultPage() {
       "Gift Ideas:",
       ...hints.map((h) => (h.url ? `${h.label} - ${h.url}` : h.label)),
     ].join("\n");
+
+    const tryClipboardAPI = async () => {
+      try {
+        if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+          await navigator.clipboard.writeText(text);
+          return true;
+        }
+      } catch {}
+      return false;
+    };
+
     try {
-      await navigator.clipboard.writeText(text);
+      let ok = await tryClipboardAPI();
+      if (!ok) {
+        const scrollX = window.scrollX;
+        const scrollY = window.scrollY;
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.style.position = "fixed";
+        textarea.style.top = "0";
+        textarea.style.left = "0";
+        textarea.style.opacity = "0";
+        textarea.style.pointerEvents = "none";
+        textarea.setAttribute("readonly", "");
+        textarea.style.fontSize = "16px"; // avoid iOS zoom
+        document.body.appendChild(textarea);
+        textarea.select();
+        ok = document.execCommand("copy");
+        document.body.removeChild(textarea);
+        window.scrollTo(scrollX, scrollY);
+        if (!ok) throw new Error("Copy failed");
+      }
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
@@ -67,7 +97,7 @@ export default function ResultPage() {
             YOUR PAIR IS
           </h1>
           <p className="text-center text-gray-700 font-black mb-6 text-xl">
-            "{pairName}" 🎁
+            {pairName} 🎁
           </p>
 
           {/* Hints list */}
@@ -75,6 +105,7 @@ export default function ResultPage() {
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-black text-red-600">Gift Ideas</h2>
               <button
+                type="button"
                 onClick={copyIdeas}
                 className="bg-yellow-300 hover:bg-yellow-400 text-black font-black text-sm py-2 px-3 rounded-xl border-2 border-black shadow-md"
               >
