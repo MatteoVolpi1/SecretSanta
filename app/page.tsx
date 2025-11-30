@@ -45,7 +45,6 @@ export default function Home() {
         setShowConfirm(false);
         return;
       }
-      setMessage(`🎅 Code "${code}" received! Preparing your present...`);
       setShowConfirm(true);
     } else {
       setMessage("⚠️ Insert your secret code!");
@@ -97,7 +96,7 @@ export default function Home() {
           <input
           type="text"
           value={code}
-          onChange={(e) => setCode(e.target.value)}
+              onChange={(e) => setCode(e.target.value.toUpperCase())}
           placeholder="Your code..."
           className="w-full px-4 py-3 border-2 border-black rounded-xl text-lg font-bold focus:outline-none focus:ring-4 focus:ring-yellow-400 shadow-md"
           style={{ color: "#666666"}}
