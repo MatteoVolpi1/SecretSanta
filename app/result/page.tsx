@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 export default function ResultPage() {
   const [code, setCode] = useState("");
   const [copied, setCopied] = useState(false);
+  const [person, setPerson] = useState<{ name: string; hints: Array<{ label: string; url?: string }> } | null>(null);
 
   useEffect(() => {
     try {
@@ -14,20 +15,20 @@ export default function ResultPage() {
     } catch {}
   }, []);
 
-  // Static demo data: name + gift ideas
-  const pairName = "Matteo"; // replace with dynamic later
-  const hints = [
-    { label: "DSW Gift Card $10-50 for winter shoes" },
-    { label: "Ross Gift Card $10-50" },
-    { label: "Shower curtains", url: "https://a.co/d/fQp7b2t" },
-    { label: "Cast iron dutch oven", url: "https://a.co/d/gOIWBjy" },
-    { label: "Wine red jumpsuit LARGE", url: "https://a.co/d/8rnHznD" },
-  ];
+  useEffect(() => {
+    try {
+      const stored = sessionStorage.getItem("person");
+      if (stored) {
+        const p = JSON.parse(stored);
+        setPerson({ name: p.name, hints: Array.isArray(p.hints) ? p.hints : [] });
+      }
+    } catch {}
+  }, []);
 
   const copyIdeas = async () => {
     const text = [
       "Gift Ideas:",
-      ...hints.map((h) => (h.url ? `${h.label} - ${h.url}` : h.label)),
+      ...((person?.hints || []).map((h) => (h.url ? `${h.label} - ${h.url}` : h.label))),
     ].join("\n");
 
     const tryClipboardAPI = async () => {
@@ -97,7 +98,7 @@ export default function ResultPage() {
             YOUR PAIR IS
           </h1>
           <p className="text-center text-gray-700 font-black mb-6 text-xl">
-            {pairName} 🎁
+            {person?.name || "Your Pair"} 🎁
           </p>
 
           {/* Hints list */}
@@ -113,7 +114,7 @@ export default function ResultPage() {
               </button>
             </div>
             <ul className="list-disc list-inside text-gray-800 font-bold">
-              {hints.map((item, idx) => (
+              {(person?.hints || []).map((item, idx) => (
                 <li key={idx} className="break-words">
                   {item.url ? (
                     <a

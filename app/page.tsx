@@ -170,16 +170,30 @@ export default function Home() {
             >
             Cancel
             </button>
-            <button
+                  <button
             className="flex-1 bg-red-600 hover:bg-red-700 text-white font-black py-3 px-4 rounded-xl border-2 border-black shadow-md"
             onClick={() => {
-              try {
-              sessionStorage.setItem("secret-code", code);
-              const used = getUsedCodes();
-              const next = Array.from(new Set([...used, code.trim()]));
-              localStorage.setItem("used-codes", JSON.stringify(next));
-              } catch {}
-              router.push(`/result`);
+                      const run = async () => {
+                        try {
+                          const res = await fetch("/api/person", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ code: code.trim() }),
+                          });
+                          const data = await res.json();
+                          if (!res.ok) {
+                            setMessage(data.error || "Error validating code");
+                            setShowConfirm(false);
+                            return;
+                          }
+                          sessionStorage.setItem("person", JSON.stringify(data.person));
+                          router.push(`/result`);
+                        } catch {
+                          setMessage("Network error. Please try again.");
+                          setShowConfirm(false);
+                        }
+                      };
+                      run();
             }}
             >
             Proceed
