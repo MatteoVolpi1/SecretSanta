@@ -131,7 +131,10 @@ export default function Home() {
             <div className="fixed inset-0 z-50 flex items-center justify-center">
               <div className="absolute inset-0 bg-black/50" onClick={() => setShowRules(false)} />
               <div className="relative bg-white border-2 border-black rounded-2xl shadow-2xl max-w-md w-full mx-4 p-6">
-                <h2 className="text-2xl font-black text-red-600 mb-3 text-center">Secret Santa Rules</h2>
+                <h2 className="text-2xl font-black text-red-600 mb-3 text-center">🎉 Welcome to Secret Santa 2025! 🎉</h2>
+                <p className="text-center text-lg font-bold text-green-700 mb-4">
+                   Fairness rules 
+                </p>
                 <ul className="list-disc list-inside text-gray-800 font-bold space-y-2">
                   <li>Keep your pair strictly secret!</li>
                   <li>The code is sent via email and can be used only once.</li>
