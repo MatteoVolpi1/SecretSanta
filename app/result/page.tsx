@@ -44,7 +44,7 @@ export default function ResultPage() {
       style={{
         backgroundImage: 'url(/images/backgrounds/5.webp)',
         backgroundRepeat: 'repeat',
-        backgroundSize: '25%'
+        backgroundSize: '400px'
       }}
     >
       <main className="max-w-md w-full">
