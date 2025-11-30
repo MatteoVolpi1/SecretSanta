@@ -13,7 +13,6 @@ export default function Home() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (code.trim()) {
-      setMessage(`🎅 Code "${code}" received! Preparing your present...`);
       setShowConfirm(true);
     } else {
       setMessage("⚠️ Insert your secret code!");
@@ -110,7 +109,12 @@ export default function Home() {
                   </button>
                   <button
                     className="flex-1 bg-red-600 hover:bg-red-700 text-white font-black py-3 px-4 rounded-xl border-2 border-black shadow-md"
-                    onClick={() => router.push(`/result?code=${encodeURIComponent(code)}`)}
+                    onClick={() => {
+                      try {
+                        sessionStorage.setItem("secret-code", code);
+                      } catch {}
+                      router.push(`/result`);
+                    }}
                   >
                     Proceed
                   </button>
