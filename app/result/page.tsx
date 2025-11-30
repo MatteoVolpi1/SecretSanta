@@ -49,11 +49,11 @@ export default function ResultPage() {
     >
       <main className="max-w-md w-full">
         <div className="bg-white rounded-2xl shadow-2xl border-2 border-black p-8 relative">
-          {/* Santa image (same style) */}
+          {/* Image */}
           <div className="flex justify-center mb-3 sm:mb-6 -mt-2 sm:-mt-4">
-            <div className="relative w-72 h-72 sm:w-96 sm:h-96">
+            <div className="relative w-72 h-72 sm:w-96 sm:h-96 overflow-hidden">
               <Image
-                src="/images/comics/reindeer.png"
+                src="/images/comics/reindeer_border4.jpg"
                 alt="Reindeer"
                 fill
                 className="object-contain p-2"
