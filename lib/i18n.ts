@@ -9,6 +9,7 @@ type Messages = {
   insertCodeWarning: string;
   usedCodeWarning: string;
   codePlaceholder: string;
+  codeNotFound: string;
   rulesTitle: string;
   rulesHeader: string;
   rulesList: string[];
@@ -22,6 +23,8 @@ type Messages = {
   giftIdeasTitle: string;
   copyLabel: string;
   copiedLabel: string;
+  languageSetInfo: (lang: "en" | "es") => string;
+  languageConfirmBody: (lang: "en" | "es") => string;
 };
 
 const en: Messages = {
@@ -32,7 +35,8 @@ const en: Messages = {
   discoverCtaShort: "Discover your pair!",
   insertCodeWarning: "⚠️ Insert your secret code!",
   usedCodeWarning:
-    "⚠️ This code has already been used. If this is a mistake, please contact Banesita.",
+    "⚠️ this code has already been used. If this is a mistake, please contact banesita.",
+  codeNotFound: "⚠️ code not found",
   codePlaceholder: "Your code...",
   rulesTitle: "🎉 Welcome to Secret Santa 2025! 🎉",
   rulesHeader: "Fairness rules",
@@ -54,6 +58,14 @@ const en: Messages = {
   giftIdeasTitle: "Gift Ideas",
   copyLabel: "Copy",
   copiedLabel: "Copied!",
+  languageSetInfo: (lang) =>
+    lang === "es"
+      ? "The site language will be set to Spanish."
+      : "The site language will be set to English.",
+  languageConfirmBody: (lang) =>
+    lang === "es"
+      ? "Are you sure? Site language will be set to Spanish."
+      : "Are you sure? Site language will be set to English.",
 };
 
 const es: Messages = {
@@ -64,7 +76,8 @@ const es: Messages = {
   discoverCtaShort: "Descubre tu pareja",
   insertCodeWarning: "⚠️ ¡Ingresa tu código secreto!",
   usedCodeWarning:
-    "⚠️ Este código ya ha sido usado. Si es un error, por favor contacta a Banesita.",
+    "⚠️ este código ya ha sido usado. Si es un error, por favor contacta a banesita.",
+  codeNotFound: "⚠️ código no encontrado",
   codePlaceholder: "Tu código...",
   rulesTitle: "🎉 ¡Bienvenido a Amigo Secreto 2025! 🎉",
   rulesHeader: "Reglas de equidad",
@@ -86,6 +99,14 @@ const es: Messages = {
   giftIdeasTitle: "Ideas de regalo",
   copyLabel: "Copiar",
   copiedLabel: "¡Copiado!",
+  languageSetInfo: (lang) =>
+    lang === "es"
+      ? "El idioma del sitio se establecerá en Español."
+      : "El idioma del sitio se establecerá en Inglés.",
+  languageConfirmBody: (lang) =>
+    lang === "es"
+      ? "¿Estás seguro? El idioma del sitio será Español."
+      : "¿Estás seguro? El idioma del sitio será Inglés.",
 };
 
 export function getMessages(lang: Lang): Messages {
