@@ -104,13 +104,13 @@ export default function ResultPage() {
           {/* Hints list */}
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-black text-red-600">{t.copyIdeas.replace("Copy ", "")}</h2>
+              <h2 className="text-2xl font-black text-red-600">{t.giftIdeasTitle}</h2>
               <button
                 type="button"
                 onClick={copyIdeas}
                 className="bg-yellow-300 hover:bg-yellow-400 text-black font-black text-sm py-2 px-3 rounded-xl border-2 border-black shadow-md"
               >
-                {copied ? "Copied!" : "Copy"}
+                {copied ? t.copiedLabel : t.copyLabel}
               </button>
             </div>
             <ul className="list-disc list-inside text-gray-800 font-bold">

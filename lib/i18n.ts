@@ -8,6 +8,7 @@ type Messages = {
   discoverCtaShort: string;
   insertCodeWarning: string;
   usedCodeWarning: string;
+  codePlaceholder: string;
   rulesTitle: string;
   rulesHeader: string;
   rulesList: string[];
@@ -18,7 +19,9 @@ type Messages = {
   confirmProceed: string;
   footer: string;
   resultTitle: string;
-  copyIdeas: string;
+  giftIdeasTitle: string;
+  copyLabel: string;
+  copiedLabel: string;
 };
 
 const en: Messages = {
@@ -30,6 +33,7 @@ const en: Messages = {
   insertCodeWarning: "⚠️ Insert your secret code!",
   usedCodeWarning:
     "⚠️ This code has already been used. If this is a mistake, please contact Banesita.",
+  codePlaceholder: "Your code...",
   rulesTitle: "🎉 Welcome to Secret Santa 2025! 🎉",
   rulesHeader: "Fairness rules",
   rulesList: [
@@ -37,6 +41,7 @@ const en: Messages = {
     "The code is sent via email and can be used only once.",
     "Total gift value should be around $50 per person.",
     "If a single present costs less, combine multiple gifts to reach ~$50.",
+    "The links are for reference, it doesn't mean it has to be exactly that."
   ],
   rulesUnderstand: "I understand",
   confirmTitle: "Attention!",
@@ -46,7 +51,9 @@ const en: Messages = {
   confirmProceed: "Proceed",
   footer: "⭐ Ho! Ho! Ho! Merry Christmas! ⭐",
   resultTitle: "Your pair is:",
-  copyIdeas: "Copy gift ideas",
+  giftIdeasTitle: "Gift Ideas",
+  copyLabel: "Copy",
+  copiedLabel: "Copied!",
 };
 
 const es: Messages = {
@@ -58,6 +65,7 @@ const es: Messages = {
   insertCodeWarning: "⚠️ ¡Ingresa tu código secreto!",
   usedCodeWarning:
     "⚠️ Este código ya ha sido usado. Si es un error, por favor contacta a Banesita.",
+  codePlaceholder: "Tu código...",
   rulesTitle: "🎉 ¡Bienvenido a Amigo Secreto 2025! 🎉",
   rulesHeader: "Reglas de equidad",
   rulesList: [
@@ -65,6 +73,7 @@ const es: Messages = {
     "El código se envía por correo y solo se puede usar una vez.",
     "El valor total del regalo debe ser alrededor de $50 por persona.",
     "Si un regalo cuesta menos, combina varios para llegar a ~$50.",
+    "Los links son de riferimento, no quiere decir que tenga que ser eso mismo."
   ],
   rulesUnderstand: "Entiendo",
   confirmTitle: "¡Atención!",
@@ -74,7 +83,9 @@ const es: Messages = {
   confirmProceed: "Continuar",
   footer: "⭐ ¡Ho! ¡Ho! ¡Ho! ¡Feliz Navidad! ⭐",
   resultTitle: "Tu pareja es:",
-  copyIdeas: "Ideas de regalo",
+  giftIdeasTitle: "Ideas de regalo",
+  copyLabel: "Copiar",
+  copiedLabel: "¡Copiado!",
 };
 
 export function getMessages(lang: Lang): Messages {
