@@ -58,12 +58,19 @@ export default function Home() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <input
-                type="text"
-                value={code}
-                onChange={(e) => setCode(e.target.value)}
-                placeholder="Your code..."
-                className="w-full px-4 py-3 border-2 border-black rounded-xl text-lg font-bold focus:outline-none focus:ring-4 focus:ring-yellow-400 shadow-md"
+              type="text"
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+              placeholder="Your code..."
+              className="w-full px-4 py-3 border-2 border-black rounded-xl text-lg font-bold focus:outline-none focus:ring-4 focus:ring-yellow-400 shadow-md"
+              style={{ color: "#666666"}}
               />
+              <style jsx>{`
+              input::placeholder {
+                color: #666666;
+                opacity: 1;
+              }
+              `}</style>
             </div>
 
             <button
