@@ -83,7 +83,7 @@ const es: Messages = {
   rulesHeader: "Reglas de equidad",
   rulesList: [
     "¡Mantén tu pareja estrictamente en secreto!",
-    "El código se envía por correo y solo se puede usar una vez.",
+    "El código se envía por email y solo se puede usar una vez.",
     "El valor total del regalo debe ser alrededor de $50 por persona.",
     "Si un regalo cuesta menos, combina varios para llegar a ~$50.",
     "Los links son de riferimento, no quiere decir que tenga que ser eso mismo."

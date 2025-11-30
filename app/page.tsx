@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/components/LanguageProvider";
+import { createIcons, icons } from "lucide";
 
 export default function Home() {
   const { t, lang } = useLanguage();
@@ -35,6 +36,13 @@ export default function Home() {
       }
     } catch {}
   }, []);
+
+  // Initialize / refresh lucide icons when component mounts or relevant state changes
+  useEffect(() => {
+    try {
+      createIcons({ icons });
+    } catch {}
+  }, [showRules, lang]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -115,6 +123,19 @@ export default function Home() {
               <p className="text-center font-bold text-gray-800">{message}</p>
             </div>
           )}
+
+          {/* Footer Rules Button */}
+          <div className="flex justify-center mt-6">
+            <button
+              type="button"
+              aria-label={lang === "es" ? "Ver reglas" : "View rules"}
+              onClick={() => setShowRules(true)}
+              className="inline-flex items-center gap-2 bg-yellow-200 hover:bg-yellow-300 active:bg-yellow-400 rounded-full px-6 py-3 border-2 border-black shadow-md transition font-black text-gray-900"
+            >
+              <i data-lucide="help-circle" className="w-6 h-6"></i>
+              <span>{lang === 'es' ? 'Reglas' : 'Rules'}</span>
+            </button>
+          </div>
 
           {/* One-time Rules Modal */}
           {showRules && (
