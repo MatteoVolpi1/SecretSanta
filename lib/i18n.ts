@@ -1,0 +1,82 @@
+export type Lang = "en" | "es";
+
+type Messages = {
+  title: string;
+  subtitleLong: string;
+  subtitleShort: string;
+  discoverCtaLong: string;
+  discoverCtaShort: string;
+  insertCodeWarning: string;
+  usedCodeWarning: string;
+  rulesTitle: string;
+  rulesHeader: string;
+  rulesList: string[];
+  rulesUnderstand: string;
+  confirmTitle: string;
+  confirmBody: string;
+  confirmCancel: string;
+  confirmProceed: string;
+  footer: string;
+  resultTitle: string;
+  copyIdeas: string;
+};
+
+const en: Messages = {
+  title: "SECRET SANTA",
+  subtitleLong: "🎄 Insert here your secret code 🎄",
+  subtitleShort: "🎄 Insert here your code 🎄",
+  discoverCtaLong: "🎅 Discover your pair! 🎅",
+  discoverCtaShort: "Discover your pair!",
+  insertCodeWarning: "⚠️ Insert your secret code!",
+  usedCodeWarning:
+    "⚠️ This code has already been used. If this is a mistake, please contact Banesita.",
+  rulesTitle: "🎉 Welcome to Secret Santa 2025! 🎉",
+  rulesHeader: "Fairness rules",
+  rulesList: [
+    "Keep your pair strictly secret!",
+    "The code is sent via email and can be used only once.",
+    "Total gift value should be around $50 per person.",
+    "If a single present costs less, combine multiple gifts to reach ~$50.",
+  ],
+  rulesUnderstand: "I understand",
+  confirmTitle: "Attention!",
+  confirmBody:
+    "The code can be used only 1 time. Remember your pair! If you write it down, keep it somewhere safe from others!",
+  confirmCancel: "Cancel",
+  confirmProceed: "Proceed",
+  footer: "⭐ Ho! Ho! Ho! Merry Christmas! ⭐",
+  resultTitle: "Your pair is:",
+  copyIdeas: "Copy gift ideas",
+};
+
+const es: Messages = {
+  title: "AMIGO SECRETO",
+  subtitleLong: "🎄 Ingresa aquí tu código secreto 🎄",
+  subtitleShort: "🎄 Ingresa tu código 🎄",
+  discoverCtaLong: "🎅 ¡Descubre tu pareja! 🎅",
+  discoverCtaShort: "Descubre tu pareja",
+  insertCodeWarning: "⚠️ ¡Ingresa tu código secreto!",
+  usedCodeWarning:
+    "⚠️ Este código ya ha sido usado. Si es un error, por favor contacta a Banesita.",
+  rulesTitle: "🎉 ¡Bienvenido a Amigo Secreto 2025! 🎉",
+  rulesHeader: "Reglas de equidad",
+  rulesList: [
+    "¡Mantén tu pareja estrictamente en secreto!",
+    "El código se envía por correo y solo se puede usar una vez.",
+    "El valor total del regalo debe ser alrededor de $50 por persona.",
+    "Si un regalo cuesta menos, combina varios para llegar a ~$50.",
+  ],
+  rulesUnderstand: "Entiendo",
+  confirmTitle: "¡Atención!",
+  confirmBody:
+    "El código solo se puede usar una vez. ¡Recuerda tu pareja! Si lo escribes, guárdalo en un lugar seguro.",
+  confirmCancel: "Cancelar",
+  confirmProceed: "Continuar",
+  footer: "⭐ ¡Ho! ¡Ho! ¡Ho! ¡Feliz Navidad! ⭐",
+  resultTitle: "Tu pareja es:",
+  copyIdeas: "Ideas de regalo",
+};
+
+export function getMessages(lang: Lang): Messages {
+  return lang === "es" ? es : en;
+}

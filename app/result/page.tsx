@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { useLanguage } from "@/components/LanguageProvider";
 
 export default function ResultPage() {
+  const { t } = useLanguage();
   const [code, setCode] = useState("");
   const [copied, setCopied] = useState(false);
   const [person, setPerson] = useState<{ name: string; hints: Array<{ label: string; url?: string }> } | null>(null);
@@ -94,9 +96,7 @@ export default function ResultPage() {
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl font-black text-center mb-2 text-red-600 comic-text">
-            YOUR PAIR IS
-          </h1>
+          <h1 className="text-4xl font-black text-center mb-2 text-red-600 comic-text">{t.resultTitle.toUpperCase()}</h1>
           <p className="text-center text-gray-700 font-black mb-6 text-xl">
             {person?.name || "Your Pair"} 🎁
           </p>
@@ -104,7 +104,7 @@ export default function ResultPage() {
           {/* Hints list */}
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-black text-red-600">Gift Ideas</h2>
+              <h2 className="text-2xl font-black text-red-600">{t.copyIdeas.replace("Copy ", "")}</h2>
               <button
                 type="button"
                 onClick={copyIdeas}
@@ -135,9 +135,7 @@ export default function ResultPage() {
         </div>
 
         {/* Footer text */}
-        <p className="text-center mt-6 text-white font-bold text-shadow-lg drop-shadow-lg">
-          ⭐ Ho! Ho! Ho! Merry Christmas! ⭐
-        </p>
+        <p className="text-center mt-6 text-white font-bold text-shadow-lg drop-shadow-lg">{t.footer}</p>
       </main>
     </div>
   );
