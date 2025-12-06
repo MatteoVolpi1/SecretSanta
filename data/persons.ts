@@ -12,11 +12,11 @@ export const persons: Person[] = [
     code: "LOYDA123",
     seen: false,
     hints: [
-      { label: "DSW Gift Card $10-50 for winter shoes" },
-      { label: "Ross Gift Card $10-50" },
-      { label: "Shower curtains", url: "https://a.co/d/fQp7b2t" },
-      { label: "Cast iron dutch oven", url: "https://a.co/d/gOIWBjy" },
-      { label: "Wine red jumpsuit LARGE", url: "https://a.co/d/8rnHznD" },
+      { label: "DSW Gift Card for winter shoes" },
+      { label: "Ross Gift Card" },
+      { label: "Cortinas de ducha tipo", url: "https://a.co/d/fQp7b2t" },
+      { label: "Horno holandés de hierro fundido tipo", url: "https://a.co/d/gOIWBjy" },
+      { label: "Mono color vino, talla LARGE tipo", url: "https://a.co/d/8rnHznD" },
     ],
   },
   {
@@ -24,9 +24,9 @@ export const persons: Person[] = [
     code: "GAVIN123",
     seen: false,
     hints: [
-      { label: "Tattoo battery", url: "https://a.co/d/0bqmRnU" },
-      { label: "Classic green library lamp, can be this", url: "https://a.co/d/48Jm9Fd" },
-      { label: "Hair shampoo", url: "https://a.co/d/gmJdalZ" },
+      { label: "Batería para máquina de tatuar tipo este", url: "https://a.co/d/0bqmRnU" },
+      { label: "Lámpara clásica verde de biblioteca tipo este", url: "https://a.co/d/48Jm9Fd" },
+      { label: "Champú de esta marca", url: "https://a.co/d/gmJdalZ" },
     ],
   },
   {
@@ -34,22 +34,34 @@ export const persons: Person[] = [
     code: "STEPH123",
     seen: false,
     hints: [
-      { label: "iPhone 15 Wildflower case", url: "https://a.co/d/6jWDCkm" },
-      { label: "Sports bra", url: "https://a.co/d/0bqmRnU" },
-      { label: "Dick's Gift Card $10-50 (saving up for New Balance 1080 for when I'm working)" },
-      { label: "Glass tupperware set (can be this or anything related)", url: "https://a.co/d/73bwfGA" },
-      { label: "Loop earbuds (Experience 2)", url: "https://a.co/d/fPzhsGh" },
-      { label: "Loop earbuds (Switch 2)", url: "https://a.co/d/0fdqvLX" },
+      { label: "Funda Wildflower para iPhone 15", url: "https://a.co/d/6jWDCkm" },
+      { label: "Top deportivo", url: "https://a.co/d/0bqmRnU" },
+      { label: "Tarjeta de regalo de Dick’s (ahorrando para New Balance 1080 para cuando esté trabajando)" },
+      { label: "Juego de tupper de vidrio (puede ser este u otra opción similar)", url: "https://a.co/d/73bwfGA" },
+      { label: "Auriculares Loop (Experience 2)", url: "https://a.co/d/fPzhsGh" },
+      { label: "Auriculares Loop (Switch 2)", url: "https://a.co/d/0fdqvLX" },
     ],
   },
-  // Fake persons with mocked data
+  {
+    name: "Victoria",
+    code: "VICTO123",
+    seen: false,
+    hints: [
+      { label: "Leggings tipo", url: "https://a.co/d/9Fer1bl" },
+      { label: "Gym set: shorts o leggings con top deportivo" },
+      { label: "Tacones tipo", url: "https://a.co/d/8oal2XR" },
+      { label: "Tacones tipo", url: "https://a.co/d/dy1OdZ6" },
+      { label: "Gift card" },
+    ],
+  },
   {
     name: "Abuela",
     code: "ABUELA123",
     seen: false,
     hints: [
-      { label: "Warm shawl" },
-      { label: "Ceramic mug", url: "https://example.com/mug" },
+      { label: "Dinero 💰" },
+      { label: "Money 💸" },
+      { label: "Plata 💵" },
     ],
   },
   {
@@ -57,17 +69,60 @@ export const persons: Person[] = [
     code: "ABUELO123",
     seen: false,
     hints: [
-      { label: "Wool hat" },
-      { label: "Reading light", url: "https://example.com/light" },
+      { label: "Gorra de frío" },
+      { label: "Perfume bueno (con notas dulces)" },
+    ],
+  },
+  {
+    name: "Tía Eliana",
+    code: "ELIANA123",
+    seen: false,
+    hints: [
+      { label: "celimax The Vita A Retinal Shot Firming | Retina 0.1%, Matryxyl 3%, Minimizer Pores, Wrinkles & Fine Lines, Firmer Skin, 15ml" },
+      { label: "Gift card" },
+      { label: "Reloj dorado" },
+      { label: "Zapatillas bonitas de punta negro o camel, número 6.5 US" },
+      { label: "YCZ firming lift neck cream" },
+      { label: "KAHI wrinkle bounce" },
+    ],
+  },
+  {
+    name: "Elgin",
+    code: "ELGIN123",
+    seen: false,
+    hints: [
+      { label: "Wireless Earbuds for AI Language Translation Real-Time", url: "https://a.co/d/5qkfiav" },
+      { label: "Juego para PLAYSTATION 5: Koei Tecmo Games Winning Post 10" },
+    ],
+  },
+  {
+    name: "Vanessa",
+    code: "VANESSA123",
+    seen: false,
+    hints: [
+      { label: "Gift card tarjeta de crédito (de supermercado)" },
+      { label: "Gift card Park City Outlet (si existe)" },
+      { label: "BCAA de Sascha Fitness (cualquier sabor)" },
+      { label: "Cualquier Lego (ya tengo: la casa de Up, el árbol genealógico; no Star Wars ni cosas de guerra), solo cosas bonitas 😍" },
+      { label: "Perfume sol de Janeiro (número 62)" }
     ],
   },
   {
     name: "Matteo",
     code: "MATTEO123",
     seen: false,
+    hints: [],
+  },
+  {
+    name: "Lucia",
+    code: "LUCIA123",
+    seen: false,
     hints: [
-      { label: "Mechanical keyboard", url: "https://example.com/keyboard" },
-      { label: "Coffee beans" },
+      { label: "Gift card Ulta Beauty" },
+      { label: "Cremas rejuvenecedoras que quiten 20 años 🤪" },
+      { label: "Crema de contorno de ojos (buena)" },
+      { label: "Ropa para caminar" },
+      { label: "Crema clinique anti age para los ojos" }
     ],
   },
 ];
