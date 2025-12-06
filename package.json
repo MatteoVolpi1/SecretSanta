@@ -11,11 +11,14 @@
     "test:pairs": "ts-node --esm scripts/generatePairs.ts"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.2.3",
+    "lucide": "^0.474.0",
     "mongodb": "^7.0.0",
-    "next": "16.0.3",
+    "next": "^16.0.7",
+    "nodemailer": "^7.0.11",
     "react": "19.2.0",
-    "react-dom": "19.2.0",
-    "lucide": "^0.474.0"
+    "react-dom": "19.2.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -25,7 +28,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.0.3",
     "tailwindcss": "^4",
-    "typescript": "^5",
-    "ts-node": "^10"
+    "ts-node": "^10",
+    "typescript": "^5"
   }
 }

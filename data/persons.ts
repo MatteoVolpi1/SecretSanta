@@ -1,7 +1,7 @@
 export type Hint = { label: string; url?: string };
 export type Person = {
   name: string;
-  code: string; // static code assigned to this person
+  code: string;
   seen: boolean;
   hints: Hint[];
 };
@@ -9,7 +9,7 @@ export type Person = {
 export const persons: Person[] = [
   {
     name: "Loyda",
-    code: "LOYDA123",
+    code: "",
     seen: false,
     hints: [
       { label: "DSW Gift Card for winter shoes" },
@@ -21,7 +21,7 @@ export const persons: Person[] = [
   },
   {
     name: "Gavin",
-    code: "GAVIN123",
+    code: "",
     seen: false,
     hints: [
       { label: "Batería para máquina de tatuar tipo este", url: "https://a.co/d/0bqmRnU" },
@@ -31,7 +31,7 @@ export const persons: Person[] = [
   },
   {
     name: "Stephanie",
-    code: "STEPH123",
+    code: "",
     seen: false,
     hints: [
       { label: "Funda Wildflower para iPhone 15", url: "https://a.co/d/6jWDCkm" },
@@ -44,7 +44,7 @@ export const persons: Person[] = [
   },
   {
     name: "Victoria",
-    code: "VICTO123",
+    code: "",
     seen: false,
     hints: [
       { label: "Leggings tipo", url: "https://a.co/d/9Fer1bl" },
@@ -56,7 +56,7 @@ export const persons: Person[] = [
   },
   {
     name: "Abuela",
-    code: "ABUELA123",
+    code: "",
     seen: false,
     hints: [
       { label: "Dinero 💰" },
@@ -66,7 +66,7 @@ export const persons: Person[] = [
   },
   {
     name: "Abuelo",
-    code: "ABUELO123",
+    code: "",
     seen: false,
     hints: [
       { label: "Gorra de frío" },
@@ -75,7 +75,7 @@ export const persons: Person[] = [
   },
   {
     name: "Tía Eliana",
-    code: "ELIANA123",
+    code: "",
     seen: false,
     hints: [
       { label: "celimax The Vita A Retinal Shot Firming | Retina 0.1%, Matryxyl 3%, Minimizer Pores, Wrinkles & Fine Lines, Firmer Skin, 15ml" },
@@ -88,7 +88,7 @@ export const persons: Person[] = [
   },
   {
     name: "Elgin",
-    code: "ELGIN123",
+    code: "",
     seen: false,
     hints: [
       { label: "Wireless Earbuds for AI Language Translation Real-Time", url: "https://a.co/d/5qkfiav" },
@@ -97,7 +97,7 @@ export const persons: Person[] = [
   },
   {
     name: "Vanessa",
-    code: "VANESSA123",
+    code: "",
     seen: false,
     hints: [
       { label: "Gift card tarjeta de crédito (de supermercado)" },
@@ -109,13 +109,13 @@ export const persons: Person[] = [
   },
   {
     name: "Matteo",
-    code: "MATTEO123",
+    code: "",
     seen: false,
     hints: [],
   },
   {
     name: "Lucia",
-    code: "LUCIA123",
+    code: "",
     seen: false,
     hints: [
       { label: "Gift card Ulta Beauty" },
