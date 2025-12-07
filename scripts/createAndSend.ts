@@ -104,10 +104,10 @@ function generateAssignments(people: Person[]): Map<string, string> {
   return assignment;
 }
 
-async function sendEmail(transporter: nodemailer.Transporter, mailSubject: string, mailText: string, giverName: string) {
+async function sendEmail(transporter: nodemailer.Transporter, mailSubject: string, mailText: string, giverName: string, toMail: string) {
     const info = await transporter.sendMail({
         from: SMTP_USER,
-        to: TEST_EMAIL,
+        to: toMail,
         subject: mailSubject,
         text: mailText,
     });
@@ -138,7 +138,7 @@ async function main() {
     // Optionally: clear collection before inserting (comment if you prefer upsert)
     // await coll.deleteMany({});
 
-    // For each person: generate code, hash it, send mail, save doc
+    // For each giver: generate code, hash it, send mail, then SAVE THE CODE ON THE RECEIVER'S DOCUMENT
     const saltRounds = 10;
     const docsToUpsert: Array<{ filter: any; update: any }> = [];
 
@@ -158,30 +158,33 @@ async function main() {
 
       const hashedCode = await bcrypt.hash(plainCode, saltRounds);
 
-      // Build doc to store (NO plain code)
+      // Build doc to store on the RECEIVER (NO plain code). The receiver should be able to log in using the giver's code.
+      const receiver = (persons as Person[]).find(p => p.name === receiverName);
+      const receiverHints = receiver?.hints || [];
       const doc: Omit<PersonDoc, "code"> & { hashedCode: string; receiverName: string; createdAt: Date } = {
-        name: giverName,
+        name: receiverName,
         hashedCode,
         receiverName,
-        hints: person.hints || [],
+        hints: receiverHints,
         seen: false,
         createdAt: new Date(),
       };
 
       // Immediately send email to TEST_EMAIL for now
       const mailSubject = `Secret Santa — code for ${giverName}`;
-      const mailText = `Hi ${giverName}!\n\nThis is your secret code to access the Secret Santa:\n\nCODE: ${plainCode}\n\nUse this code on the website to see who you will be gifting.\n\nPS: for now, all emails go to a test address.\n`;
+      const mailText = `Hi ${giverName}!\n\nThis is your secret code to access the Secret Santa:\n\nCODE: ${plainCode}\n\nUse this code on the website to see who you will be gifting.\n\nHappy gifting!\n`;
 
       console.log(`Giver: ${giverName}, Receiver: ${receiverName}, Code: ${plainCode}`);
 
       // send email
-      //await sendEmail(transporter, mailSubject, mailText, giverName);
+      await sendEmail(transporter, mailSubject, mailText, giverName, TEST_EMAIL);
 
-      // queue upsert (upsert by name)
+      // queue upsert (upsert by receiver name)
       docsToUpsert.push({
-        filter: { name: giverName },
+        filter: { name: receiverName },
         update: { $set: doc },
       });
+      break;
     }
 
     // apply upserts in bulk

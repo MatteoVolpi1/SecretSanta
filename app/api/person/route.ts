@@ -37,6 +37,7 @@ export async function POST(req: Request) {
     // We store bcrypt hashes in the DB; bcrypt uses random salts,
     // so re-hashing the input and matching won't work. Instead,
     // iterate candidates and use bcrypt.compare.
+    // Match RECEIVER documents by comparing submitted code to stored hashedCode
     const candidates = (await coll
       .find({}, { projection: { name: 1, hints: 1, hashedCode: 1, seen: 1 } })
       .toArray()) as Array<any>;
@@ -56,6 +57,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: t.usedCodeWarning }, { status: 409 });
     }
     await coll.updateOne({ _id: matched._id }, { $set: { seen: true } });
+    // Return the RECEIVER's info (matched doc)
     return NextResponse.json({ person: { name: matched.name, hints: matched.hints, hashedCode: matched.hashedCode, seen: true } });
   } catch (err) {
     console.error("Database error:", err);

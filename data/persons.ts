@@ -2,6 +2,7 @@ export type Hint = { label: string; url?: string };
 export type Person = {
   name: string;
   seen: boolean;
+  email: string;
   hints: Hint[];
 };
 
@@ -9,6 +10,7 @@ export const persons: Person[] = [
   {
     name: "Loyda",
     seen: false,
+    email: "loydacarniello@msn.com",
     hints: [
       { label: "DSW Gift Card for winter shoes" },
       { label: "Ross Gift Card" },
@@ -20,6 +22,7 @@ export const persons: Person[] = [
   {
     name: "Gavin",
     seen: false,
+    email: "gavinkelley04@gmail.com",
     hints: [
       { label: "Batería para máquina de tatuar tipo este", url: "https://a.co/d/0bqmRnU" },
       { label: "Lámpara clásica verde de biblioteca tipo este", url: "https://a.co/d/48Jm9Fd" },
@@ -29,6 +32,7 @@ export const persons: Person[] = [
   {
     name: "Stephanie",
     seen: false,
+    email: "stephanievilcapoma.sv@gmail.com",
     hints: [
       { label: "Funda Wildflower para iPhone 15", url: "https://a.co/d/6jWDCkm" },
       { label: "Top deportivo", url: "https://a.co/d/0bqmRnU" },
@@ -41,6 +45,7 @@ export const persons: Person[] = [
   {
     name: "Victoria",
     seen: false,
+    email: "byvicvvs@gmail.com",
     hints: [
       { label: "Leggings tipo", url: "https://a.co/d/9Fer1bl" },
       { label: "Gym set: shorts o leggings con top deportivo" },
@@ -52,6 +57,7 @@ export const persons: Person[] = [
   {
     name: "Abuela",
     seen: false,
+    email: "yrisfranco79@gmail.com",
     hints: [
       { label: "Dinero 💰" },
       { label: "Money 💸" },
@@ -61,6 +67,7 @@ export const persons: Person[] = [
   {
     name: "Abuelo",
     seen: false,
+    email: "jorgerafsanchez@gmail.com",
     hints: [
       { label: "Gorra de frío" },
       { label: "Perfume bueno (con notas dulces)" },
@@ -69,6 +76,7 @@ export const persons: Person[] = [
   {
     name: "Tía Eliana",
     seen: false,
+    email: "elianacarolinasan@gmail.com",
     hints: [
       { label: "celimax The Vita A Retinal Shot Firming | Retina 0.1%, Matryxyl 3%, Minimizer Pores, Wrinkles & Fine Lines, Firmer Skin, 15ml" },
       { label: "Gift card" },
@@ -81,6 +89,7 @@ export const persons: Person[] = [
   {
     name: "Elgin",
     seen: false,
+    email: "elginvillanueva@gmail.com",
     hints: [
       { label: "Wireless Earbuds for AI Language Translation Real-Time", url: "https://a.co/d/5qkfiav" },
       { label: "Juego para PLAYSTATION 5: Koei Tecmo Games Winning Post 10" },
@@ -89,6 +98,7 @@ export const persons: Person[] = [
   {
     name: "Vanessa",
     seen: false,
+    email: "vanezuela98@gmail.com",
     hints: [
       { label: "Gift card tarjeta de crédito (de supermercado)" },
       { label: "Gift card Park City Outlet (si existe)" },
@@ -100,11 +110,17 @@ export const persons: Person[] = [
   {
     name: "Matteo",
     seen: false,
-    hints: [],
+    email: "foxdodici@gmail.com",
+    hints: [
+      { label: "Ravenor: The Omnibus (book)", url: "https://www.amazon.com/Ravenor-Omnibus-Warhammer-40-000/dp/1836090919" },
+      { label: "Machine Learning Engineering (book)", url: "https://www.amazon.com/Machine-Learning-Engineering-Andriy-Burkov/dp/1999579577/" },
+      { label: "Fun colorful shirt/Hoodie (Size M)" }
+    ],
   },
   {
     name: "Lucia",
     seen: false,
+    email: "Paintinglc@yahoo.com",
     hints: [
       { label: "Gift card Ulta Beauty" },
       { label: "Cremas rejuvenecedoras que quiten 20 años 🤪" },
