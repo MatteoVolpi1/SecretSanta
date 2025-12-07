@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getMessages } from "@/lib/i18n";
 import { getDb, PersonDoc } from "@/lib/mongo";
+import bcrypt from "bcryptjs";
 
 type RequestBody = { code?: string };
 
@@ -33,14 +34,29 @@ export async function POST(req: Request) {
   try {
     const db = await getDb();
     const coll = db.collection<PersonDoc>("persons");
-    // Ensure unique index on { code } in production for efficiency & integrity.
-    const person = await coll.findOne({ code });
-    if (!person) return NextResponse.json({ error: t.codeNotFound }, { status: 404 });
-    if (person.seen) {
+    // We store bcrypt hashes in the DB; bcrypt uses random salts,
+    // so re-hashing the input and matching won't work. Instead,
+    // iterate candidates and use bcrypt.compare.
+    const candidates = (await coll
+      .find({}, { projection: { name: 1, hints: 1, hashedCode: 1, seen: 1 } })
+      .toArray()) as Array<any>;
+
+    let matched: any | null = null;
+    for (const p of candidates) {
+      if (!p.hashedCode) continue;
+      const ok = await bcrypt.compare(code, p.hashedCode);
+      if (ok) {
+        matched = p;
+        break;
+      }
+    }
+
+    if (!matched) return NextResponse.json({ error: t.codeNotFound }, { status: 404 });
+    if (matched.seen) {
       return NextResponse.json({ error: t.usedCodeWarning }, { status: 409 });
     }
-    await coll.updateOne({ code }, { $set: { seen: true } });
-    return NextResponse.json({ person: { name: person.name, hints: person.hints, code, seen: true } });
+    await coll.updateOne({ _id: matched._id }, { $set: { seen: true } });
+    return NextResponse.json({ person: { name: matched.name, hints: matched.hints, hashedCode: matched.hashedCode, seen: true } });
   } catch (err) {
     console.error("Database error:", err);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });

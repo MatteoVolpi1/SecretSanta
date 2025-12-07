@@ -1,13 +1,12 @@
 import { MongoClient } from "mongodb";
 
-// Use user-provided env var
-const uri = process.env.MONGO_CONNECTION_URI || "";
 let client: MongoClient | null = null;
 let clientPromise: Promise<MongoClient> | null = null;
 
 export async function getDb() {
-  // If no URI, throw to let caller handle mock mode
-  if (!uri) throw new Error("MONGODB_URI not configured");
+  // Read env lazily so dotenv-loaded vars are visible
+  const uri = process.env.MONGO_CONNECTION_URI || process.env.MONGODB_URI || "";
+  if (!uri) throw new Error("MongoDB connection URI missing: set MONGO_CONNECTION_URI or MONGODB_URI");
 
   if (!clientPromise) {
     client = new MongoClient(uri);
