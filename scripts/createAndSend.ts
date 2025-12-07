@@ -104,6 +104,17 @@ function generateAssignments(people: Person[]): Map<string, string> {
   return assignment;
 }
 
+async function sendEmail(transporter: nodemailer.Transporter, mailSubject: string, mailText: string, giverName: string) {
+    const info = await transporter.sendMail({
+        from: SMTP_USER,
+        to: TEST_EMAIL,
+        subject: mailSubject,
+        text: mailText,
+    });
+
+    console.log(`Email inviata (test) per ${giverName} — messageId: ${info.messageId}`);
+}
+
 async function main() {
   console.log("Start: generate assignments, create codes, send emails, save to MongoDB");
 
@@ -161,17 +172,10 @@ async function main() {
       const mailSubject = `Secret Santa — code for ${giverName}`;
       const mailText = `Hi ${giverName}!\n\nThis is your secret code to access the Secret Santa:\n\nCODE: ${plainCode}\n\nUse this code on the website to see who you will be gifting.\n\nPS: for now, all emails go to a test address.\n`;
 
-      console.log(`Giver: ${giverName}, Code: ${plainCode}`);
+      console.log(`Giver: ${giverName}, Receiver: ${receiverName}, Code: ${plainCode}`);
 
-      // Send mail
-      //const info = await transporter.sendMail({
-      //  from: SMTP_USER,
-      //  to: TEST_EMAIL,
-      //  subject: mailSubject,
-      //  text: mailText,
-      //});
-
-      //console.log(`Email inviata (test) per ${giverName} — messageId: ${info.messageId}`);
+      // send email
+      //await sendEmail(transporter, mailSubject, mailText, giverName);
 
       // queue upsert (upsert by name)
       docsToUpsert.push({
