@@ -174,17 +174,18 @@ async function main() {
       const mailSubject = `Secret Santa — code for ${giverName}`;
       const mailText = `Hi ${giverName}!\n\nThis is your secret code to access the Secret Santa:\n\nCODE: ${plainCode}\n\nUse this code on the website to see who you will be gifting.\n\nHappy gifting!\n`;
 
-      console.log(`Giver: ${giverName}, Receiver: ${receiverName}, Code: ${plainCode}`);
+      const giver = (persons as Person[]).find(p => p.name === giverName);
+      const giverEmail = (giver as any)?.email || "unknown";
+      console.log(`Giver: ${giverName} (${giverEmail}), Receiver: ${receiverName}, Code: ${plainCode}`);
 
       // send email
-      await sendEmail(transporter, mailSubject, mailText, giverName, TEST_EMAIL);
+      //await sendEmail(transporter, mailSubject, mailText, giverName, TEST_EMAIL);
 
       // queue upsert (upsert by receiver name)
       docsToUpsert.push({
         filter: { name: receiverName },
         update: { $set: doc },
       });
-      break;
     }
 
     // apply upserts in bulk
