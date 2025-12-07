@@ -41,12 +41,24 @@ if (!process.env.SMTP_PORT) throw new Error("SMTP_PORT missing");
 if (!process.env.SMTP_USER) throw new Error("SMTP_USER missing");
 if (!process.env.SMTP_PASS) throw new Error("SMTP_PASS missing");
 if (!process.env.TEST_EMAIL) throw new Error("TEST_EMAIL missing");
+if (!process.env.PERSON_EMAILS) throw new Error("PERSON_EMAILS missing (JSON map of name->email)");
 
 const SMTP_HOST = process.env.SMTP_HOST;
 const SMTP_PORT = Number(process.env.SMTP_PORT);
 const SMTP_USER = process.env.SMTP_USER;
 const SMTP_PASS = process.env.SMTP_PASS;
 const TEST_EMAIL = process.env.TEST_EMAIL;
+const PERSON_EMAILS_ENV = process.env.PERSON_EMAILS;
+let PERSON_EMAILS: Record<string, string> = {};
+try {
+  PERSON_EMAILS = JSON.parse(PERSON_EMAILS_ENV!);
+} catch (e) {
+  throw new Error("Invalid PERSON_EMAILS JSON in .env");
+}
+
+function getEmailForName(name: string): string | undefined {
+  return PERSON_EMAILS[name] || PERSON_EMAILS[name.toLowerCase()];
+}
 
 function isForbiddenPair(giver: string, receiver: string): boolean {
   const a = giver.toLowerCase();
@@ -174,12 +186,12 @@ async function main() {
       const mailSubject = `Secret Santa — code for ${giverName}`;
       const mailText = `Hi ${giverName}!\n\nThis is your secret code to access the Secret Santa:\n\nCODE: ${plainCode}\n\nUse this code on the website to see who you will be gifting.\n\nHappy gifting!\n`;
 
-      const giver = (persons as Person[]).find(p => p.name === giverName);
-      const giverEmail = (giver as any)?.email || "unknown";
+      const giverEmail = getEmailForName(giverName) || "unknown";
       console.log(`Giver: ${giverName} (${giverEmail}), Receiver: ${receiverName}, Code: ${plainCode}`);
 
       // send email
-      //await sendEmail(transporter, mailSubject, mailText, giverName, TEST_EMAIL);
+      // const to = giverEmail !== "unknown" ? giverEmail : TEST_EMAIL;
+      // await sendEmail(transporter, mailSubject, mailText, giverName, to!);
 
       // queue upsert (upsert by receiver name)
       docsToUpsert.push({
